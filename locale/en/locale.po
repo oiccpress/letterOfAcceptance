@@ -1,0 +1,35 @@
+msgid "plugins.generic.letterOfAcceptance.displayName"
+msgstr "Letter Of Acceptance"
+
+msgid "plugins.generic.letterOfAcceptance.description"
+msgstr "This plugin adds publisher defined letters of acceptance."
+
+msgid "plugins.generic.letterOfAcceptance.loaTemplate"
+msgstr "Letter of Acceptance Template"
+
+msgid "plugins.generic.letterOfAcceptance.variable.currentDate"
+msgstr "Current Date"
+
+msgid "plugins.generic.letterOfAcceptance.variable.authorFullName"
+msgstr "Author Full Name"
+
+msgid "plugins.generic.letterOfAcceptance.variable.authorAffiliation"
+msgstr "Author Affiliation"
+
+msgid "plugins.generic.letterOfAcceptance.variable.submissionTitle"
+msgstr "Submission Title"
+
+msgid "plugins.generic.letterOfAcceptance.variable.submissionId"
+msgstr "Submission ID"
+
+msgid "plugins.generic.letterOfAcceptance.variable.journalName"
+msgstr "Journal Name"
+
+msgid "plugins.generic.letterOfAcceptance.variable.siteName"
+msgstr "Site Name"
+
+msgid "plugins.generic.letterOfAcceptance.variable.journalPrincipalContactName"
+msgstr "Journal Principal Contact Name"
+
+msgid "plugins.generic.letterOfAcceptance.variable.journalPrincipalContactEmail"
+msgstr "Journal Principal Contact Email"
