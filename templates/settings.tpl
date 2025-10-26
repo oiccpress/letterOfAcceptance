@@ -25,7 +25,7 @@
 	{fbvFormSection label="plugins.generic.letterOfAcceptance.loaTemplate"}
 		{fbvElement
 			type="textarea"
-            rich=true
+            rich="extended"
 			id="loa_template"
             value=$loa_template
             variables=$loa_variables

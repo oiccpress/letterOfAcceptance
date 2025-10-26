@@ -7,6 +7,7 @@ use APP\handler\Handler;
 use APP\plugins\generic\letterOfAcceptance\classes\Constants;
 use APP\publication\Publication;
 use Illuminate\Support\Facades\Mail;
+use PKP\config\Config;
 use PKP\core\PKPRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -45,6 +46,14 @@ class LOAPageHandler extends Handler {
         $template = $this->plugin->getSetting($request->getContext()->getId(), Constants::SETTING_TEMPLATE)
             ?: $this->plugin->getSetting(null, Constants::SETTING_TEMPLATE);
 
+        $journalLogo = '';
+        $thumb = $journal->getLocalizedData('journalThumbnail');
+        if($thumb) {
+            $journalFilesPath = $request->getBaseUrl() . '/' . Config::getVar('files', 'public_files_dir') . '/journals/';
+            $url = $journalFilesPath . $journal->getId() . '/' . $thumb['uploadName'] . '?v=' . sha1($thumb['dateUploaded']);
+            $journalLogo = '<img style="max-width:200px;height:auto" src="' . $url . '" />';
+        }
+
         // Next Build up variables
         $args = [
             'currentDate' => date('d M Y'),
@@ -56,6 +65,7 @@ class LOAPageHandler extends Handler {
             'siteName' => $site->getLocalizedTitle(),
             'journalPrincipalContactName' => $journal->getContactName(),
             'journalPrincipalContactEmail' => $journal->getContactEmail(),
+            'journalLogo' => $journalLogo,
         ];
 
         // Replace variables (For some reason PKP does this in Mail, but it's fine to use)

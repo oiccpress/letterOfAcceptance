@@ -74,6 +74,7 @@ class SettingsForm extends Form
             'siteName' => __('plugins.generic.letterOfAcceptance.variable.siteName'),
             'journalPrincipalContactName' => __('plugins.generic.letterOfAcceptance.variable.journalPrincipalContactName'),
             'journalPrincipalContactEmail' => __('plugins.generic.letterOfAcceptance.variable.journalPrincipalContactEmail'),
+            'journalLogo' => __('plugins.generic.letterOfAcceptance.variable.journalLogo'),
         ]);
 
         parent::initData();

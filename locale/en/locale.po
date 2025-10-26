@@ -33,3 +33,6 @@ msgstr "Journal Principal Contact Name"
 
 msgid "plugins.generic.letterOfAcceptance.variable.journalPrincipalContactEmail"
 msgstr "Journal Principal Contact Email"
+
+msgid "plugins.generic.letterOfAcceptance.variable.journalLogo"
+msgstr "Journal Logo"
