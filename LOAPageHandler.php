@@ -6,6 +6,7 @@ use APP\facades\Repo;
 use APP\handler\Handler;
 use APP\plugins\generic\letterOfAcceptance\classes\Constants;
 use APP\publication\Publication;
+use APP\submission\Submission;
 use Illuminate\Support\Facades\Mail;
 use PKP\config\Config;
 use PKP\core\PKPRequest;
@@ -16,6 +17,8 @@ class LOAPageHandler extends Handler {
     /** @var null|Publication $publication being requested */
     public ?Publication $publication = null;
 
+    public ?Submission $submission = null;
+
     public function __construct(public LetterOfAcceptancePlugin $plugin)
     {
         parent::__construct();   
@@ -25,7 +28,8 @@ class LOAPageHandler extends Handler {
     {
 
         $submissionId = $args[0];
-        $this->publication = Repo::publication()->get((int) $submissionId);
+        $this->submission = Repo::submission()->get((int) $submissionId);
+        $this->publication = $this->submission->getCurrentPublication();
         if(!$this->publication) {
             throw new NotFoundHttpException();
         }
@@ -60,7 +64,7 @@ class LOAPageHandler extends Handler {
             'authorFullName' => $primaryAuthor ? $primaryAuthor->getFullName() : 'Unknown',
             'authorAffiliation' => implode("; ", $affiliation),
             'submissionTitle' => $this->publication->getLocalizedFullTitle(),
-            'submissionId' => $this->publication->getId(),
+            'submissionId' => $this->submission->getId(),
             'journalName' => $journal->getLocalizedName(),
             'siteName' => $site->getLocalizedTitle(),
             'journalPrincipalContactName' => $journal->getContactName(),

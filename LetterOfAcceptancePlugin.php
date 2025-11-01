@@ -20,6 +20,7 @@ use APP\template\TemplateManager;
 use PKP\core\JSONMessage;
 use PKP\plugins\GenericPlugin;
 use PKP\plugins\Hook;
+use PKP\security\Role;
 
 class LetterOfAcceptancePlugin extends GenericPlugin {
 
@@ -56,15 +57,24 @@ class LetterOfAcceptancePlugin extends GenericPlugin {
 
     public function addJavaScript($request, $templateMgr)
     {
-        $templateMgr->addJavaScript(
-            'LetterOfAcceptanceButton',
-            "{$request->getBaseUrl()}/{$this->getPluginPath()}/admin.js",
-            [
-                'inline' => false,
-                'contexts' => ['backend'],
-                'priority' => TemplateManager::STYLE_SEQUENCE_LAST
-            ]
-        );
+        /** @var PageRouter */
+        $router = $request->getRouter();
+        $handler = $router->getHandler();
+        $userRoles = (array) $handler->getAuthorizedContextObject(Application::ASSOC_TYPE_USER_ROLES);
+
+        if (count(array_intersect([Role::ROLE_ID_MANAGER, Role::ROLE_ID_SITE_ADMIN], $userRoles))) {
+
+            $templateMgr->addJavaScript(
+                'LetterOfAcceptanceButton',
+                "{$request->getBaseUrl()}/{$this->getPluginPath()}/admin.js",
+                [
+                    'inline' => false,
+                    'contexts' => ['backend'],
+                    'priority' => TemplateManager::STYLE_SEQUENCE_LAST
+                ]
+            );
+
+        }
     }
 
     /**
